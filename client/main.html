@@ -1,0 +1,45 @@
+<head>
+  <title>myCoolApp</title>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Monthly Resolution</h1>
+    <label class="hide-finished">
+      <input type="checkbox" checked="{{hideFinished}}">
+      Hide Finished Resolutions
+    </label>
+    {{#if currentUser}}
+    <form class="new-resolution">
+      <input type="text" name="title" placeholder="A New Resolution">
+      <input type="submit" value="Submit" name="btnSubmit">
+    </form>
+    {{/if}}
+  </header>
+  <ul>
+    {{#each resolutions}}
+      {{> resolution}}
+    {{/each}}
+    {{> loginButtons}}
+ </ul>
+ </div>
+
+</body>
+<template name="resolution">
+    <li class="{{#if checked}}checked{{/if}}">
+    {{#if isOwner}}
+      <input type="checkbox" checked="{{checked}}" class="toggle-checked">
+        <button class="toggle-private">
+          {{#if private}}
+            Private
+          {{else}}
+            Public
+          {{/if}}
+        </button>
+        {{/if}}
+      <span class="text">{{title}}</span>
+      {{#if isOwner}}
+        <button class="delete">Remove</button>
+      {{/if}}
+    </li>
+</template>
